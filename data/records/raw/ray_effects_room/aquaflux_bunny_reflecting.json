@@ -1,0 +1,36 @@
+{
+  "mesh": "bunny",
+  "wall_reflectance": 0.5,
+  "facet_side_m": 0.2,
+  "room_triangles": 4000,
+  "lamp_facets": 17920,
+  "radiosity_cycles": 3,
+  "lamp_power_W": 0.11882631633163881,
+  "lamp_direct_on_room_W": 0.11386141939866591,
+  "absorbed_by_room_W": 0.11312884880958102,
+  "absorbed_elsewhere_W": 0.0056974675220577975,
+  "reflected_share_of_floor_power": 0.134422944810448,
+  "manual_vs_library_slices_max_rel": 0.0,
+  "facet_size_check": {
+    "floor_reflected_max_rel_of_peak": 0.0509884638917753,
+    "slices_reflected_median_rel": 0.003206771824074345
+  },
+  "timing_s": {
+    "fine": 2360.3,
+    "coarse": 223.6,
+    "volume_reflected": {
+      "visibility_s": 1526.7,
+      "gather_s": 72.3
+    },
+    "total": 4183.9
+  },
+  "backend": "cpu",
+  "host": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+  "code": {
+    "aquaflux_commit": "8dd4caae79727cb334ebee423d62fc962c5910b1",
+    "worktree_clean": true,
+    "modified": []
+  },
+  "cpu_count": 11,
+  "jax": "0.10.2"
+}

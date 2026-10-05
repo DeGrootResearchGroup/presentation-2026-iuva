@@ -1,0 +1,86 @@
+{
+  "floor_full": {
+    "exact": {
+      "L2_of_peak": 0.0,
+      "floor_share_of_lamp": 0.8372618988421314,
+      "window_share_of_lamp": 0.3429795628935347,
+      "negative_share_of_lamp": 0.0,
+      "max_of_exact_peak": 1.0
+    },
+    "dom72": {
+      "L2_of_peak": 2.5796814136752486,
+      "floor_share_of_lamp": 0.8692966657756104,
+      "window_share_of_lamp": 0.4784765297080548,
+      "negative_share_of_lamp": -0.19480013263195878,
+      "max_of_exact_peak": 23.370329358347195
+    },
+    "dom288": {
+      "L2_of_peak": 1.0754326790554454,
+      "floor_share_of_lamp": 0.7837242009293042,
+      "window_share_of_lamp": 0.2369471368080549,
+      "negative_share_of_lamp": -0.12467635256506018,
+      "max_of_exact_peak": 6.394873378523913
+    },
+    "aquaflux": {
+      "L2_of_peak": 1.4231569500591524e-06,
+      "floor_share_of_lamp": 0.8372619028687609,
+      "window_share_of_lamp": 0.342979567962812,
+      "negative_share_of_lamp": 0.0,
+      "max_of_exact_peak": 0.9999999925395797
+    }
+  },
+  "floor_L2_of_peak": {
+    "dom72": 3.528923330629412,
+    "dom288": 1.2130241682746992,
+    "aquaflux": 2.846313172979803e-06
+  },
+  "slice_L2_of_p99": {
+    "dom72": 0.005142341374298749,
+    "dom288": 0.0016611232043397801,
+    "aquaflux": 0.0001279444894464114
+  },
+  "wall_s": {
+    "dom72": 2804.2,
+    "dom288": 10853.1,
+    "dom72_1x1": 2654.2,
+    "dom72_reflecting": 14596.5,
+    "aquaflux_floor": 282.5,
+    "aquaflux_volume": 851.0,
+    "aquaflux_reflecting": 4183.9
+  },
+  "floor_full_1x1": {
+    "dom72_1x1": 2.579681388277088
+  },
+  "wall_s_notes": {
+    "dom72": null,
+    "dom288": null
+  },
+  "reflecting_dom": {
+    "wall_reflectance": 0.5,
+    "directions": 72,
+    "n_pixel_phi": 1,
+    "n_pixel_theta": 1,
+    "outer_iterations": 65,
+    "wall_seconds": 14596.5
+  },
+  "cells": 2461089,
+  "configuration": {
+    "room_m": [
+      4.0,
+      4.0,
+      3.0
+    ],
+    "wavelength_nm": 222,
+    "lamp": "Ushio B1 (OSLUV IES), window 60 x 45 mm on the ceiling centre, 118.8 mW",
+    "bunny_base_m": 1.2,
+    "walls": "black (reflectance 0)",
+    "medium": "transparent air",
+    "dom": "of-optical-radiation opticalRadiationFoam, 8 MPI ranks, converged to 1e-5",
+    "aquaflux": "CPU, 11 cores, jax 0.10.2",
+    "aquaflux_lamp_facets": {
+      "floor": 17920,
+      "volume": 1120
+    },
+    "exact": "per-point ray-traced sum over 17,920 window samples (numpy + Embree)"
+  }
+}

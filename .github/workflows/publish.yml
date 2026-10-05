@@ -1,0 +1,60 @@
+name: Publish slides
+
+on:
+  push:
+    branches: [main]
+  # Render (without deploying) on pull requests, so a broken slide is caught before merge.
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+
+      # The figures are committed, so no Python step: the render needs only Quarto.
+      - name: Render slides
+        run: quarto render slides.qmd
+
+      # The deck references figures/, img/ and slides_files/ beside slides.html; nothing else.
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp slides.html _site/index.html
+          cp -R slides_files figures img _site/
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

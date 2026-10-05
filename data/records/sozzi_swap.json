@@ -1,0 +1,107 @@
+{
+  "title": "Sozzi & Taghipour reactor, swap set on the uvmesh (slide 15)",
+  "common": [
+    [
+      "Mesh, flow, tracker",
+      "as the slide 10 set: uvmesh, k-ω SST at iteration 2059, OOR `b23582b` `langevin`, seed 42, one thread, so every run follows the same particles"
+    ],
+    [
+      "aquaflux G",
+      "aquaflux `validation/sozzi_radiation/uvmesh_swap.py`: the mesh's own lamp patches (87,040 triangles) coarsened to 16,878 facets (4 mm edge, 0.1 mm chord, 35.429 W); exact visibility through the pipe openings; jax 0.10.2, gathered in 816 s; aquaflux `2ba97418` (PR #598) for the gather, `2f243441` (PR #600, open) for the write and compare stages"
+    ],
+    [
+      "DO",
+      "OOR `659ec4a`, 8 MPI ranks, convergence 1e-5 (15 and 15 sweeps); uniform angular grids, nPhi = nTheta (Fluent: 3 × 3 and 6 × 6 θ × φ divisions per octant)"
+    ],
+    [
+      "Patch values",
+      "zeroGradient on every ordinary patch for the three compared fields and the Fluent fields (the non-conformal couplings keep their constraint types); `dom288_native` keeps the DO file as written"
+    ],
+    [
+      "Fluent G",
+      "ANSYS Fluent DO on this mesh, 3 × 3 and 6 × 6 θ × φ divisions per octant, exported to CGNS (`Incident_Radiation` only; the Fluent version, pixelation and scheme are not recorded); of-mesh-converter `b654443` (PR #2, open) `transfer` copied G cell for cell into `swap/fluent33` and `swap/fluent66`; traced like the other runs, all 9,987 particles escaping in 127,033 outer steps as in every run"
+    ]
+  ],
+  "tables": [
+    {
+      "title": "Fluence rate fields traced",
+      "columns": [
+        "G",
+        "directions",
+        "pixels",
+        "ray scheme",
+        "patch values",
+        "mean dose",
+        "LR k=0.1",
+        "LR k=0.5"
+      ],
+      "rows": [
+        [
+          "aquaflux",
+          "—",
+          "—",
+          "—",
+          "zeroGradient",
+          "49.3",
+          "1.490",
+          "5.366"
+        ],
+        [
+          "dom72",
+          "72 (6×6)",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "zeroGradient",
+          "49.2",
+          "1.475",
+          "5.249"
+        ],
+        [
+          "dom288",
+          "288 (12×12)",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "zeroGradient",
+          "49.5",
+          "1.491",
+          "5.358"
+        ],
+        [
+          "dom288_native",
+          "288 (12×12)",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "the solver's own",
+          "49.5",
+          "1.491",
+          "5.358"
+        ],
+        [
+          "fluent72",
+          "72 (3 × 3 per octant)",
+          "not recorded",
+          "not recorded",
+          "zeroGradient",
+          "49.1",
+          "1.474",
+          "5.252"
+        ],
+        [
+          "fluent288",
+          "288 (6 × 6 per octant)",
+          "not recorded",
+          "not recorded",
+          "zeroGradient",
+          "49.4",
+          "1.490",
+          "5.365"
+        ]
+      ]
+    }
+  ],
+  "notes": [
+    "9,987 of 9,987 particles escaped, the same ones in every run (checked by the harness).",
+    "Volume-weighted mean G over the reactor: aquaflux 133.78, dom72 133.29, dom288 134.22, fluent72 133.08, fluent288 134.00 W/m².",
+    "DO over aquaflux, cell by cell where aquaflux's G exceeds 1e-3 of its peak, percentiles 10 to 90: dom72 0.858 to 1.111; dom288 0.979 to 1.028."
+  ]
+}

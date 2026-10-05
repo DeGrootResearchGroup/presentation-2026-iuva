@@ -1,0 +1,34 @@
+{
+  "bunny": {
+    "source_stl": "<local>",
+    "translate": [
+      0.000236496,
+      0.009318374,
+      1.202034782
+    ],
+    "bounds": [
+      [
+        -0.303412,
+        -0.226764,
+        1.2
+      ],
+      [
+        0.303412,
+        0.226764,
+        1.7924
+      ]
+    ]
+  },
+  "check_mesh": {
+    "cells": 2461089,
+    "faces": 7592408,
+    "max_non_orthogonality_deg": 62.57881063,
+    "max_skewness": 4.786231985,
+    "max_aspect_ratio": 4.589621083,
+    "tolerated_failures": {
+      "skew_faces": 4,
+      "concave_cells": 67136
+    }
+  },
+  "of_optical_radiation_commit": "96e51ee39ce94757c5083c0b72c37fa5bf7f4db1"
+}

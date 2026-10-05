@@ -1,0 +1,37 @@
+{
+  "mesh": "bunny",
+  "lamp_power_W": 0.11882631633163881,
+  "lamp_facets": 1120,
+  "refined_lamp_facets": 17920,
+  "floor_faces": 41548,
+  "floor_power_W": 0.09948874772271324,
+  "floor_share_of_lamp_power": 0.8372619028687609,
+  "coarse_vs_refined": {
+    "max_abs_W_per_m2": 0.00016040104292655913,
+    "max_rel_of_peak": 0.01179591128505561,
+    "p99_rel_lit": 0.014961047387805413
+  },
+  "timing": {
+    "coarse": {
+      "visibility_s": 10.22,
+      "gather_s": 7.76
+    },
+    "refined": {
+      "visibility_s": 134.96,
+      "gather_s": 129.06
+    }
+  },
+  "total_s": 282.5,
+  "backend": "cpu",
+  "devices": [
+    "cpu:0"
+  ],
+  "host": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+  "code": {
+    "aquaflux_commit": "8dd4caae79727cb334ebee423d62fc962c5910b1",
+    "worktree_clean": true,
+    "modified": []
+  },
+  "cpu_count": 11,
+  "jax": "0.10.2"
+}

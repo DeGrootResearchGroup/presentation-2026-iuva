@@ -1,0 +1,26 @@
+# Cluster job scripts for the strong-scaling runs: they carry a personal cluster account and
+# host names, so they are kept locally only.
+/scripts/cluster/
+
+# Fluent's CGNS exports (about 1 GB), the input to slide 10's Fluent column: kept locally only.
+/fluent_results/
+
+# Rendered deck. It is rebuilt from slides.qmd (quarto render), locally or by CI.
+/slides.html
+/slides_files/
+/.quarto/
+/_site/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
+venv/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

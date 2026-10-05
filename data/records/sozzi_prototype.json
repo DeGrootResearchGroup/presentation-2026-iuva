@@ -1,0 +1,75 @@
+{
+  "title": "Sozzi & Taghipour prototype reactor (slide 10)",
+  "common": [
+    [
+      "Source",
+      "Sozzi & Taghipour (2006), Table 1 and Fig. 1c; the prototype's measured MS2 log reduction (1.51 at 25 GPM) is read off their Fig. 9"
+    ],
+    [
+      "Shared",
+      "35 W UV output, 70 % UVT (absorption 0.357 /cm), 25 US gal/min"
+    ],
+    [
+      "Mean dose integral",
+      "∫G dV / Q with their multiple-point-source lamp model (200 sources, arc centred in the body): 49.0 mJ/cm² for the simulated reactor, 47.4 for the prototype, by `scripts/sozzi_mean_dose.py` (lamp holder and outlet reduction ring not included)"
+    ]
+  ],
+  "tables": [
+    {
+      "title": "Geometry (their Table 1)",
+      "columns": [
+        "",
+        "Simulated (L-shape)",
+        "Industrial prototype"
+      ],
+      "rows": [
+        [
+          "Reactor body diameter",
+          "8.9 cm",
+          "8.6 cm"
+        ],
+        [
+          "Reactor body length",
+          "88.9 cm",
+          "101 cm"
+        ],
+        [
+          "Lamp diameter",
+          "2 cm",
+          "2.26 cm"
+        ],
+        [
+          "Lamp arc length",
+          "80 cm",
+          "88 cm"
+        ],
+        [
+          "UV output",
+          "35 W",
+          "35 W"
+        ],
+        [
+          "Inlet/outlet diameter",
+          "1.91 cm",
+          "2.24 cm"
+        ],
+        [
+          "Inlet/outlet length",
+          "85 cm",
+          "100 cm"
+        ],
+        [
+          "Other",
+          "—",
+          "lamp holder, outlet reduction ring"
+        ],
+        [
+          "Mean dose integral [mJ/cm²]",
+          "49.0",
+          "47.4"
+        ]
+      ]
+    }
+  ],
+  "notes": []
+}

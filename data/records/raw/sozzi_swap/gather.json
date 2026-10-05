@@ -1,0 +1,21 @@
+{
+  "cells": 1232629,
+  "lamp_patches": [
+    "lamp0_wall",
+    "lamp0_tip_B"
+  ],
+  "patch_triangles": 87040,
+  "lamp_facets": 16878,
+  "lamp_edge_m": 0.004,
+  "lamp_chord_m": 0.0001,
+  "exact_patch_power_W": 35.42869140848565,
+  "coarsened_power_W": 35.42869140850719,
+  "longest_edge_max_m": 0.003960927581918172,
+  "exitance_W_per_m2": 696.42,
+  "absorption_per_m": 35.67,
+  "walls": "black",
+  "visibility": "compare_fluence.BranchOpenings in the pipes, none needed in the chamber",
+  "gather_chunk_cells": 4000,
+  "gather_seconds": 816.3,
+  "jax": "0.10.2"
+}

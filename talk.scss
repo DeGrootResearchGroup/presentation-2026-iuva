@@ -1,0 +1,702 @@
+/*-- scss:defaults --*/
+
+$western-purple: #4B2682;
+$this-work: #6b3fa0;
+$fluent: #eb6834;
+$ink2: #52514e;
+$line: #c9c6d1;
+
+/*-- scss:rules --*/
+
+// Talk-specific layout helpers. The group template (theme.scss) is left
+// untouched so it can be updated independently.
+
+// Figures fill their column and never overflow the slide.
+.reveal .slides section img {
+  max-height: 470px;
+}
+.reveal img.fig-fill,
+.reveal .fig-fill img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+// Centre a height-limited figure in its column (so a centred panel title lines up).
+.reveal img.fig-fill.figctr {
+  display: block;
+  margin: 0 auto;
+}
+// Figure centred under a table, with a gap above it.
+.reveal .fig-below {
+  text-align: center;
+  margin-top: 0.6em;
+}
+.reveal .fig-below img {
+  height: 200px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.reveal .fig-center {
+  text-align: center;
+}
+.reveal .fig-center img {
+  margin: 0 auto;
+}
+
+// Small grey caption / source line under a figure.
+.reveal .src {
+  font-size: 0.5em;
+  color: $ink2;
+  margin-top: 0.2em;
+}
+
+// Short supporting sentence under a figure (assertion-evidence allows one).
+.reveal .takeaway {
+  display: block;
+  line-height: 1.3;
+  font-size: 0.7em;
+  color: #1a1a1a;
+  margin-top: 0.4em;
+}
+
+// ----------------------------------------------------- pipeline (opening)
+$pipe-cols: 1fr 34px 1fr 34px 1fr 34px 1fr 34px 1fr;
+.reveal .pipeline {
+  display: grid;
+  grid-template-columns: $pipe-cols;
+  align-items: start;
+  margin-top: 1.6em;
+}
+.reveal .pipeline .stage {
+  text-align: center;
+}
+.reveal .pipeline .stage img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 8px;
+}
+.reveal .pipeline .stage .label {
+  font-size: 0.62em;
+  font-weight: 600;
+  margin-top: 0.3em;
+  line-height: 1.2;
+}
+.reveal .pipeline .stage .sub {
+  font-size: 0.5em;
+  color: $ink2;
+  line-height: 1.2;
+}
+.reveal .pipeline .arrow {
+  text-align: center;
+  font-size: 0.9em;
+  color: #8a8894;
+  margin-top: 2.1em;
+}
+.reveal .pipeline .result {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $this-work;
+  border-radius: 8px;
+  background: #efe9f6;
+  font-size: 0.62em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.reveal .pipeline.brackets {
+  margin-top: 0.9em;
+}
+.reveal .pipeline.brackets .br {
+  grid-row: 1;
+  border-top: 4px solid $this-work;
+  text-align: center;
+  font-size: 0.62em;
+  font-weight: 600;
+  color: $this-work;
+  padding-top: 0.25em;
+}
+
+.reveal .pipeline.fluent-row {
+  margin-top: 0.7em;
+}
+.reveal .pipeline.fluent-row .fl-tag {
+  grid-row: 1;
+  text-align: center;
+  font-size: 0.56em;
+  line-height: 1.25;
+  color: #1a1a1a;
+  background: #fdeee6;
+  border: 2px solid $fluent;
+  border-radius: 8px;
+  padding: 0.3em 0.4em;
+}
+.reveal .pipeline.fluent-row .fl-tag b {
+  color: $fluent;
+}
+.reveal .pipeline.fluent-row .row-tag {
+  grid-row: 1;
+  grid-column: 9;
+  align-self: center;
+  text-align: center;
+  font-size: 0.6em;
+  font-weight: 700;
+  color: $fluent;
+}
+.reveal .pipeline.of-row .row-tag {
+  color: #2f6f9f;
+}
+.reveal .pipeline.of-row {
+  margin-top: 0.5em;
+}
+.reveal .pipeline.of-row .fl-tag.of {
+  background: #e6eff6;
+  border-color: #2f6f9f;
+}
+.reveal .pipeline.of-row .fl-tag.of b {
+  color: #2f6f9f;
+}
+.reveal .pipeline.of-row .fl-tag.missing {
+  border-style: dashed;
+}
+
+// Two renders side by side
+.reveal .pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.reveal .pair img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain;
+  margin: 0;
+}
+
+// --------------------------------------------- comparison tables (fvDOM)
+.reveal table.compare {
+  font-size: 0.52em;
+  border-collapse: separate;
+  border-spacing: 4px;
+  width: 100%;
+  margin: 0;
+}
+.reveal table.compare th {
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 3px solid $western-purple !important;
+  padding: 0.25em 0.5em;
+}
+.reveal table.compare th.fl { color: $fluent; }
+.reveal table.compare th.tw { color: $this-work; }
+.reveal table.compare td {
+  padding: 0.35em 0.5em;
+  border-radius: 6px;
+  vertical-align: middle;
+  border: none !important;
+  line-height: 1.2;
+}
+.reveal table.compare td.cap {
+  font-weight: 600;
+  background: transparent;
+}
+.reveal table.compare th.fv { color: #2f6f9f; }
+.reveal table.compare td.fv { background: #e6eff6; }
+.reveal table.compare td.fl { background: #fdeee6; }
+.reveal table.compare td.tw { background: #efe9f7; }
+
+// ---------------------------------------------- dictionary (dose tracker)
+.reveal .dict pre {
+  margin: 0;
+  width: 100%;
+  box-shadow: none;
+}
+.reveal .dict pre code {
+  font-size: 18px;
+  line-height: 1.35;
+  max-height: none;
+  overflow: visible;
+}
+
+// ----------------------------------------------- stats table (Sozzi slide)
+.reveal table.stats {
+  font-size: 0.5em;
+  margin: 0.4em auto 0;
+  border-collapse: collapse;
+}
+.reveal table.stats th,
+.reveal table.stats td {
+  padding: 0.15em 0.9em;
+  text-align: center;
+}
+.reveal table.stats th { font-weight: 600; }
+.reveal table.stats .tw { color: $this-work; }
+.reveal table.stats .fl { color: $fluent; }
+.reveal table.stats td.tbd { color: #8a8894; font-style: italic; }
+// Context from a different reactor: shown, but set apart from the comparison.
+.reveal table.stats .ctx { color: #8a8894; }
+
+// ------------------------------------------------------------ panel headers
+.reveal .panel-head {
+  font-size: 0.62em;
+  font-weight: 700;
+  color: $western-purple;
+  margin-bottom: 0.2em;
+}
+
+.reveal .panel-head.ctr {
+  display: block;
+  text-align: center;
+}
+
+// Two renders side by side in one column (slide 11).
+.reveal .dummy-pair {
+  display: flex;
+  gap: 0.4em;
+  justify-content: center;
+  align-items: flex-start;
+}
+.reveal section .dummy-pair img {
+  width: auto;
+  max-width: 50%;
+  height: auto;
+  max-height: 420px;
+  margin: 0;
+}
+
+// ----------------------------------------------------------------- closing
+.reveal .closing {
+  font-size: 0.75em;
+}
+.reveal .closing code {
+  font-size: 0.8em;
+}
+
+.reveal .divider-sub {
+  display: block;
+  text-align: center;
+  font-size: 0.62em;
+  color: $ink2;
+  margin-top: 0.4em;
+}
+
+// Appendix divider slides: title alone, centred on the slide
+.reveal .slides section.divider:not(#title-slide) > h2:first-child {
+  margin-top: 270px;
+  text-align: center;
+  font-size: 2.2em;
+  border-bottom: none;
+}
+
+// -------------------------------------------------------- ray-effects room
+.reveal .renders {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.reveal .renders img {
+  height: 195px;
+  width: auto;
+  margin: 0;
+  min-width: 0;
+}
+.reveal .src.tight {
+  display: block;
+  line-height: 1.3;
+}
+.reveal img.maps {
+  display: block;
+  height: 400px;
+  width: auto;
+  margin: 0 auto;
+}
+// aquaflux model backup: full-width diagram, then equations at a reduced size
+.reveal img.aqfig {
+  display: block;
+  width: 1160px;
+  max-width: none;
+  max-height: none;
+  height: auto;
+  margin: 0 auto;
+  flex: none;
+}
+.reveal img.aqfig.lg {
+  width: 1030px;
+}
+.reveal img.aqfig.md {
+  width: 820px;
+}
+.reveal img.aqfig.sm {
+  width: 740px;
+}
+.reveal .aqrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.reveal .aqleft {
+  flex: none;
+  width: 740px;
+}
+.reveal .aqright {
+  flex: none;
+  width: 400px;
+  font-size: 0.46em;
+  line-height: 1.2;
+}
+.reveal .aqright p {
+  margin: 0.1em 0;
+}
+.reveal .aqright .katex-display {
+  margin: 0.05em 0;
+}
+.reveal .aqeq.aqwide {
+  width: 1160px;
+  margin: 0 auto;
+}
+.reveal .aqeq.aqwide > .columns:last-child {
+  margin-top: 1.1em;
+}
+.reveal .aqeq.wrap table {
+  width: 100%;
+}
+.reveal .aqeq.small.lim.lim2 {
+  font-size: 0.64em;
+}
+.reveal .aqeq.small.lim {
+  font-size: 0.72em;
+}
+.reveal .aqeq.small.wrap th,
+.reveal .aqeq.small.wrap td {
+  white-space: normal;
+}
+.reveal .aqeq.small .columns {
+  display: flex;
+  justify-content: center;
+  gap: 2.5em;
+}
+.reveal .aqeq.small th,
+.reveal .aqeq.small td {
+  white-space: nowrap;
+}
+.reveal .aqeq.small th:nth-child(3),
+.reveal .aqeq.small td:nth-child(3) {
+  min-width: 4.4em;
+}
+.reveal .aqleft.xl {
+  width: 560px;
+}
+.reveal img.aqfig.xl {
+  width: 560px;
+}
+
+.reveal img.aqfig.ov {
+  width: 940px;
+}
+.reveal img.aqfig.xl2 {
+  width: 560px;
+}
+.reveal .aqright.big {
+  width: 620px;
+  font-size: 0.56em;
+  line-height: 1.3;
+}
+.reveal .aqright.big table {
+  width: 100%;
+}
+.reveal .aqright.big .src {
+  font-size: 0.9em;
+}
+.reveal .aqeq.small.mid .columns {
+  align-items: center;
+}
+.reveal .aqeq.small .column {
+  max-width: 560px;
+  width: auto !important;
+  flex: none;
+}
+.reveal .aqeq .katex-display {
+  margin: 0.25em 0;
+}
+.reveal .aqeq {
+  font-size: 0.72em;
+}
+.reveal .aqeq.small {
+  font-size: 0.56em;
+}
+// Between .small and the default, for backup tables with room to spare.
+.reveal .aqeq.medium {
+  font-size: 0.64em;
+}
+.reveal .aqeq.medium th,
+.reveal .aqeq.medium td {
+  padding: 0.14em 0.5em;
+}
+.reveal .aqeq .src {
+  font-size: 0.9em;
+}
+.reveal .aqeq.small th,
+.reveal .aqeq.small td {
+  padding: 0.12em 0.5em;
+}
+.reveal .aqeq.small table {
+  margin: 0.2em 0 0;
+}
+// Symbol tables on the fullest backup slides: tighter rows so the last one clears the footer.
+.reveal .aqeq.small.compact th,
+.reveal .aqeq.small.compact td {
+  padding: 0.04em 0.5em;
+  line-height: 1.2;
+}
+.reveal img.gather {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+.reveal .method ul,
+.reveal .method ol {
+  font-size: 0.52em;
+  line-height: 1.3;
+  margin: 0.2em 0 0 1em;
+}
+.reveal .method li {
+  margin-bottom: 0.2em;
+}
+.reveal .method.big ul,
+.reveal .method.big ol {
+  font-size: 0.66em;
+  margin-top: 0.9em;
+}
+.reveal .method.big li {
+  margin-bottom: 0.35em;
+}
+// For backup slides with few lines and room to spare: body text near the main slides' size.
+.reveal .method.xl ul,
+.reveal .method.xl ol {
+  font-size: 0.8em;
+  line-height: 1.35;
+  margin-top: 0.5em;
+}
+.reveal .method.xl li {
+  margin-bottom: 0.5em;
+}
+.reveal .panel-head.lg {
+  font-size: 0.8em;
+}
+.reveal table.stats.room {
+  font-size: 0.46em;
+  margin: 0.2em 0 0;
+}
+.reveal table.stats.room th.dom { color: $this-work; text-align: left; }
+.reveal table.stats.room th.aq { color: #2a78d6; text-align: left; }
+.reveal .room-foot {
+  display: grid;
+  grid-template-columns: 56% 44%;
+  gap: 14px;
+  align-items: center;
+  margin-top: 0.2em;
+}
+.reveal .room-foot .takeaway {
+  margin: 0;
+  font-size: 0.6em;
+}
+.reveal .keypoints ul {
+  font-size: 0.58em;
+  line-height: 1.3;
+  margin: 0.3em 0 0 1em;
+}
+.reveal .keypoints li {
+  margin-bottom: 0.15em;
+}
+.reveal .src.note {
+  margin-top: 0.6em;
+  padding: 0.35em 0.5em;
+  border-left: 3px solid #8a8894;
+  background: #f6f5f8;
+}
+
+// ---------------------------------------------------------- radiation swap
+.reveal .pipeline.swap-row {
+  margin-top: 0.1em;
+}
+.reveal .pipeline.swap-row + .pipeline.brackets {
+  margin-top: 0.4em;
+}
+.reveal .pipeline .stage.swap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.reveal .pipeline .stage.swap .opt {
+  border-radius: 8px;
+  font-size: 0.5em;
+  line-height: 1.2;
+  padding: 0.35em 0.3em;
+  text-align: center;
+}
+.reveal .pipeline .stage.swap .opt.dom {
+  border: 2px solid $this-work;
+  background: #efe9f6;
+}
+.reveal .pipeline .stage.swap .opt.aq {
+  border: 2px solid #2a78d6;
+  background: #e8f1fb;
+}
+.reveal .pipeline.brackets .br.same {
+  color: #8a8894;
+  border-top-color: #c9c6d1;
+}
+.reveal .pipeline.swap-row .stage img {
+  height: 88px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+.reveal .pipeline.swap-row {
+  align-items: end;
+}
+.reveal img.swapchart {
+  display: block;
+  height: 200px;
+  width: auto;
+  margin: 0;
+}
+.reveal .status-list .panel-head {
+  display: block;
+  margin-top: 0.4em;
+}
+.reveal .status {
+  font-size: 0.52em;
+  line-height: 1.3;
+  padding: 0.4em 0.6em;
+  border-left: 3px solid #2a78d6;
+  background: #e8f1fb;
+}
+
+// --------------------------------------------------- applications (intro)
+.reveal .apps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 0.6em;
+}
+.reveal .apps .app {
+  text-align: center;
+}
+.reveal .apps .app img {
+  height: 300px;
+  width: 100%;
+  object-fit: contain;
+  margin: 0.2em 0;
+}
+.reveal .apps .app-head {
+  font-size: 0.7em;
+  font-weight: 700;
+  color: $western-purple;
+}
+.reveal .apps .app-sub {
+  font-size: 0.52em;
+  color: $ink2;
+  line-height: 1.3;
+}
+
+// ------------------------------------------------- run records (backup)
+.reveal .record table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 0 0.3em;
+}
+.reveal .record table.rec-common th,
+.reveal .record table.rec-common td,
+.reveal .record table.rec-runs th,
+.reveal .record table.rec-runs td {
+  font-size: 0.42em;
+  line-height: 1.25;
+  padding: 0.12em 0.4em;
+  border-bottom: 1px solid $line;
+  vertical-align: top;
+  text-align: left;
+}
+.reveal .record table.rec-common th {
+  width: 16%;
+  color: $western-purple;
+}
+.reveal .record table.rec-runs th {
+  color: $western-purple;
+  border-bottom: 2px solid $western-purple;
+}
+.reveal .record code {
+  font-size: 0.95em;
+}
+.reveal .record .rec-head {
+  font-size: 0.5em;
+  font-weight: 700;
+  color: $western-purple;
+  margin-top: 0.4em;
+}
+.reveal .record .rec-note {
+  font-size: 0.4em;
+  color: $ink2;
+}
+
+// ------------------------------------------------------------- uvmesh
+// Three square mesh renders side by side, each with a label and one line beneath.
+.reveal .trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  margin-top: 0.6em;
+  text-align: center;
+}
+.reveal .trio img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  margin: 0;
+}
+.reveal .trio .label {
+  font-size: 0.62em;
+  font-weight: 600;
+  margin-top: 0.3em;
+  line-height: 1.2;
+}
+.reveal .trio .sub {
+  font-size: 0.5em;
+  color: $ink2;
+  line-height: 1.25;
+}
+
+// Numbered derivation steps with their own equations (appendix slides)
+.reveal .aqright.steps {
+  font-size: 0.52em;
+  line-height: 1.32;
+  width: 680px;
+}
+.reveal .steps ol {
+  margin: 0;
+  padding-left: 1.3em;
+  font-size: 1em;
+}
+.reveal .steps li {
+  margin-bottom: 0.7em;
+}
+.reveal .steps .katex-display {
+  margin: 0.45em 0 0.2em;
+}
+.reveal .steps .note {
+  display: block;
+  color: $ink2;
+  font-size: 0.88em;
+  margin-top: 0.2em;
+}
+
+// Slide 15: G at the lamp tip from the three fields, with their timings.
+.reveal img.tipcompare {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0.1em 0 0;
+}

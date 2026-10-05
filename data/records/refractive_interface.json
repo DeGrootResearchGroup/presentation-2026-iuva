@@ -1,0 +1,50 @@
+{
+  "title": "Refractive interface (slide 8)",
+  "common": [
+    [
+      "Case",
+      "of-optical-radiation `tutorials/refractiveInterface2D`, extracted from the commit with `git archive`"
+    ],
+    [
+      "Code",
+      "OOR 4f958357; OpenFOAM 13-18870c24d21c, in a Docker image built from of-optical-radiation's `Dockerfile`"
+    ],
+    [
+      "Run",
+      "2026-09-29, ./Allrun (blockMesh, createZones, splitMeshRegions, foamMultiRun)"
+    ],
+    [
+      "Result",
+      "G_A = 8.124818, G_B = 16.89883 W/m²"
+    ]
+  ],
+  "tables": [
+    {
+      "title": "Radiation settings per region",
+      "columns": [
+        "region",
+        "nPhi×nTheta",
+        "pixels",
+        "ray scheme",
+        "conv. / max iter"
+      ],
+      "rows": [
+        [
+          "mediumA",
+          "8×1",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "1e-6 / 100"
+        ],
+        [
+          "mediumB",
+          "8×1",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "1e-6 / 100"
+        ]
+      ]
+    }
+  ],
+  "notes": []
+}

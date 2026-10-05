@@ -1,0 +1,178 @@
+/*-- scss:defaults --*/
+
+// Western purple, the university's brand colour.
+$western-purple: #4B2682;
+
+$body-bg: #ffffff;
+$body-color: #1a1a1a;
+$link-color: $western-purple;
+
+$presentation-heading-color: $western-purple;
+$presentation-heading-font-weight: 700;
+// Close to reveal.js's own default (40px) rather than shrunk — research-slide
+// guidance (e.g. Penn State's Assertion-Evidence approach) calls for body
+// text no smaller than ~18-24pt-equivalent and headline text ~28-36pt, and
+// shrinking the root further than this makes that hard to hit on a slide
+// that also carries a header rule and footer bar.
+$presentation-font-size-root: 36px;
+$presentation-line-height: 1.35;
+
+$code-block-bg: #f5f5f5;
+
+/*-- scss:rules --*/
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: $western-purple;
+}
+
+// h2 is the per-slide title (each slide is a `##` heading) — this is the
+// "headline" in Assertion-Evidence terms, so it's sized closer to h1 than a
+// typical sub-heading.
+.reveal h1 {
+  font-size: 1.7em;
+}
+.reveal h2 {
+  font-size: 1.4em;
+}
+.reveal h3 {
+  font-size: 1.1em;
+}
+
+.reveal p,
+.reveal li,
+.reveal table {
+  font-size: 1em;
+}
+
+// Code tends to run longer per line than prose, so it keeps a modest step
+// down rather than matching body text 1:1.
+.reveal pre code {
+  font-size: 0.7em;
+}
+
+// Quarto's title-block CSS sizes the affiliation line at 0.7em by default,
+// noticeably smaller than the author name and date next to it — bring it up
+// to the same size so the three read as one block. Quarto's own rule for
+// this (`.reveal .quarto-title-block .quarto-title-authors
+// .quarto-title-author .quarto-title-affiliation`) is five classes deep, so
+// a plain `.reveal .quarto-title-affiliation` loses on specificity without
+// `!important`.
+.reveal .quarto-title-affiliation {
+  font-size: 1em !important;
+}
+
+// ---------------------------------------------------------------------------
+// Header: every content slide's title sits in the same top-left position
+// with a rule underneath, like a running header — not vertically centered
+// with the body, and not repositioned by how much content follows it.
+//
+// Quarto marks the auto-generated cover slide with id="title-slide" (there's
+// no .title-slide class despite the name suggesting otherwise) — excluded
+// here so it keeps Quarto's own centered cover-page treatment.
+// ---------------------------------------------------------------------------
+
+.reveal .slides section:not(#title-slide) {
+  text-align: left;
+}
+
+.reveal .slides section:not(#title-slide) > h1:first-child,
+.reveal .slides section:not(#title-slide) > h2:first-child,
+.reveal .slides section:not(#title-slide) > h3:first-child {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.2em;
+  border-bottom: 3px solid $western-purple;
+}
+
+// ---------------------------------------------------------------------------
+// Fixed footer bar: logo (left), deck title (centre), slide number (right).
+// Quarto renders the logo image, footer text and slide number as separate
+// elements; this repositions all three into one bar so they read as a single
+// unit.
+// ---------------------------------------------------------------------------
+
+// Quarto's own revealjs/plugin/quarto-support/footer.css loads AFTER this
+// theme file and sets bottom/top/right on these same elements without
+// !important (including a rule that pushes slide-number to the top-right
+// specifically to dodge the logo's default corner) — so !important here is
+// required to win the cascade, not just defensive styling.
+$footer-height: 48px;
+$logo-max-height: 26px;
+
+.reveal .slide-logo {
+  // Only constrain height; leave width auto so the browser derives it from
+  // the image's own aspect ratio instead of stretching to max-width (that
+  // combination — an explicit height *and* a tighter max-width — is what
+  // silently squashes the logo).
+  height: auto !important;
+  width: auto !important;
+  max-height: $logo-max-height !important;
+  max-width: none !important;
+  // The reveal theme puts a `margin: var(--r-block-margin) 0` on every
+  // `.reveal img` (for images in slide content); it applies here too and,
+  // left unset, quietly shifts the fixed-positioned logo up by that amount
+  // since `bottom` positions the margin edge, not the visible image edge.
+  margin: 0 !important;
+  top: auto !important;
+  bottom: ($footer-height - $logo-max-height) / 2 !important;
+  left: 24px !important;
+  right: auto !important;
+  // The logo and the footer bar both sit at z-index 2 in Quarto's own CSS;
+  // since the footer div comes later in the DOM it paints on top and hides
+  // the logo entirely unless raised above it here.
+  z-index: 3 !important;
+}
+
+.reveal .footer {
+  position: fixed;
+  bottom: 0 !important;
+  left: 0;
+  width: 100%;
+  height: $footer-height;
+  background-color: $western-purple;
+  color: #fff;
+  // reveal.js's footer plugin toggles this element with an inline
+  // `style="display: block"` (its show/hide mechanism) — that inline style
+  // beats a plain stylesheet `display: flex`, silently turning off the
+  // centering below, so it needs `!important` to actually win.
+  display: flex !important;
+  align-items: center;
+  // Centered on the slide itself (the full bar width), not on the leftover
+  // gap between the logo and slide number — the leftover-gap version looked
+  // centered on empty space rather than on the page once the much-wider
+  // logo zone pulled it visibly off the slide's true midpoint.
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.reveal .slide-number {
+  top: auto !important;
+  bottom: 0 !important;
+  right: 20px !important;
+  height: $footer-height;
+  // reveal.js core hardcodes Helvetica here instead of inheriting the
+  // deck's own font, so it's the one element that silently doesn't match
+  // the Source Sans Pro used everywhere else unless reset.
+  font-family: inherit;
+  // reveal.js core (reveal.css, loaded before this theme) puts a 5px padding
+  // on .slide-number; left as content-box padding, it adds 10px on top of
+  // the height above, un-centering it in the footer bar.
+  padding: 0 !important;
+  box-sizing: border-box;
+  // Same inline `style="display: block"` override as .footer above.
+  display: flex !important;
+  align-items: center;
+  background-color: transparent !important;
+  color: #fff !important;
+  font-size: 16px;
+}
+
+// Reserve space above the footer bar so slide content never sits under it.
+.reveal .slides section {
+  padding-bottom: $footer-height + 20px;
+  box-sizing: border-box;
+}

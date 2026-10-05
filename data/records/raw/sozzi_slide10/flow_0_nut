@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | uvReactorSozzi2006: turbulent kinematic viscosity
+   \\    /   O peration     |
+    \\  /    A nd           |
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// nut_inlet = Cmu * k^2 / eps = 0.09 * 0.4555^2 / 37.83 = 4.94e-4 m^2/s
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 4.94e-4;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    wall
+    {
+        type            nutUSpaldingWallFunction;
+        value           uniform 0;
+    }
+
+    "(reactor_seam_(lamp0|pipe0|pipe1|layer0)|(lamp0|pipe0|pipe1|layer0)_seam)"
+    {
+        type zeroGradient;
+    }
+
+    inlet
+    {
+        type            calculated;
+        value           uniform 4.94e-4;
+    }
+
+    outlet
+    {
+        type            calculated;
+        value           uniform 4.94e-4;
+    }
+
+
+}
+
+// ************************************************************************* //

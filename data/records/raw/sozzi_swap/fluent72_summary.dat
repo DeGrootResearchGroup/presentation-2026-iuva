@@ -1,0 +1,14 @@
+# radiationDose summary
+totalSeeded     9987
+escaped         9987
+timedOut        0
+stuck           0
+terminated      0
+stillActive     0
+meanDose_mJcm2  49.086151
+stdevDose_mJcm2 43.780477
+minDose_mJcm2   13.666922
+maxDose_mJcm2   3272.876
+# Dose statistics and logReduction lines use the escaped population only (N = 9987).
+# Tracks that timed out, got stuck, or hit maxDose are not representative of reactor throughput and are excluded.
+logReduction_k=0.1  1.4737733

@@ -1,0 +1,51 @@
+{
+  "mesh": "empty",
+  "cells": 1927024,
+  "lamp_facets": 1120,
+  "refined_lamp_facets": 17920,
+  "slice_cells": 38934,
+  "coarse_vs_refined_on_slices": {
+    "0.05-0.2 m": {
+      "cells": 289,
+      "max_rel": 0.010089576135923527,
+      "p99_rel": 0.00956599007656378
+    },
+    "0.2-0.5 m": {
+      "cells": 123,
+      "max_rel": 0.00022046883752823023,
+      "p99_rel": 0.0002176413862067989
+    },
+    "0.5-1.0 m": {
+      "cells": 334,
+      "max_rel": 6.154244736751416e-05,
+      "p99_rel": 4.48822077557613e-05
+    },
+    "1.0-6.0 m": {
+      "cells": 35710,
+      "max_rel": 2.3662208098449305e-05,
+      "p99_rel": 1.1393995076090153e-05
+    }
+  },
+  "volume_integral_G_W_m": 0.38861209151362053,
+  "lamp_power_W": 0.11882631633163881,
+  "timing": {
+    "volume": {
+      "visibility_s": 0.0,
+      "gather_s": 57.8
+    },
+    "slices_refined": {
+      "visibility_s": 0.0,
+      "gather_s": 13.4
+    }
+  },
+  "total_s": 71.7,
+  "backend": "cpu",
+  "host": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+  "code": {
+    "aquaflux_commit": "8dd4caae79727cb334ebee423d62fc962c5910b1",
+    "worktree_clean": true,
+    "modified": []
+  },
+  "cpu_count": 11,
+  "jax": "0.10.2"
+}

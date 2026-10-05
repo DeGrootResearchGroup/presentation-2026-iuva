@@ -1,0 +1,57 @@
+{
+  "lamp_power_W_each": 0.11882631633163881,
+  "tlv_eye_mJ_cm2": 23.0,
+  "tlv_skin_mJ_cm2": 479.0,
+  "dummies": {
+    "adult_male": {
+      "height_m": 1.799,
+      "peak_E_head_W_m2": 0.021939852700848996,
+      "peak_E_body_W_m2": 0.08336489456230056,
+      "hours_to_eye_TLV": 2.9120017239868075,
+      "hours_to_skin_TLV": 15.960621824588284,
+      "position_yaw": [
+        -1.25,
+        -1.0,
+        0.0
+      ]
+    },
+    "adult_female": {
+      "height_m": 1.56,
+      "peak_E_head_W_m2": 0.021939196252790984,
+      "peak_E_body_W_m2": 0.05775147973918261,
+      "hours_to_eye_TLV": 2.9120888547027466,
+      "hours_to_skin_TLV": 23.03933269873974,
+      "position_yaw": [
+        1.25,
+        1.0,
+        90.0
+      ]
+    },
+    "child": {
+      "height_m": 1.227,
+      "peak_E_head_W_m2": 0.00948501439014673,
+      "peak_E_body_W_m2": 0.038570332666122156,
+      "hours_to_eye_TLV": 6.735771424370031,
+      "hours_to_skin_TLV": 34.49686491100023,
+      "position_yaw": [
+        1.25,
+        -1.0,
+        180.0
+      ]
+    },
+    "elder_female": {
+      "height_m": 1.539,
+      "peak_E_head_W_m2": 0.0021618955276468607,
+      "peak_E_body_W_m2": 0.023669132871978343,
+      "hours_to_eye_TLV": 29.55225544984103,
+      "hours_to_skin_TLV": 56.214799365581634,
+      "position_yaw": [
+        0.0,
+        0.0,
+        45.0
+      ]
+    }
+  },
+  "backend": "cpu",
+  "jax": "0.10.2"
+}

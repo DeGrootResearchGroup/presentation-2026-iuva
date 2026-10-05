@@ -1,0 +1,23 @@
+{
+  "mesh": "bunny",
+  "bunny": "stl",
+  "window_samples": 17920,
+  "window_area_m2": 0.002734375,
+  "floor_faces": 41548,
+  "floor_power_W": 0.09946412656452693,
+  "strip_faces": 776,
+  "strip_samples_x4_max_change_of_peak": 0.0009944124116859718,
+  "seconds": 85.8,
+  "slice_cells": {
+    "vertical": 24742,
+    "horizontal": 21064
+  },
+  "host": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+  "code": {
+    "aquaflux_commit": "8dd4caae79727cb334ebee423d62fc962c5910b1",
+    "worktree_clean": true,
+    "modified": []
+  },
+  "python": "3.13.4",
+  "trimesh": "5.1.0"
+}

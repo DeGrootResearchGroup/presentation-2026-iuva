@@ -1,0 +1,11 @@
+{
+  "of_optical_radiation_commit": "4f95835786b644ef7fe9eac672b6e68b6952ad3e",
+  "of_optical_radiation_how": "tutorial from git archive 4f95835; library from aquaflux validation/ray_effects_room/work/foamuser (stamped 4f95835)",
+  "openfoam_build": "13-18870c24d21c",
+  "image": "oor:local",
+  "run": "2026-09-29, ./Allrun (blockMesh, createZones, splitMeshRegions, foamMultiRun)",
+  "result_W_per_m2": {
+    "G_A": 8.124818,
+    "G_B": 16.89883
+  }
+}

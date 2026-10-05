@@ -1,0 +1,98 @@
+{
+  "title": "Sozzi & Taghipour reactor, uvmesh set (slides 2, 3, 9, 10)",
+  "common": [
+    [
+      "Mesh",
+      "uvmesh (OOR `276d992`), the deck's `data/uvmesh/mesh.py`: 1,232,629 cells, max non-orthogonality 52.8°; 20 µm at the lamp sleeve (structured lamp layer), 100 µm at the chamber wall (wall layer), joined non-conformally to a polyhedral bulk"
+    ],
+    [
+      "Flow",
+      "k-ω SST, foamRun incompressibleFluid, PIMPLE with local time stepping (the tutorial's fvSolution: nCorrectors 2, nNonOrthogonalCorrectors 2, maxCo 1); U (-5.51, 0, 0) m/s (25 US gal/min), k 0.4555 m2/s2, omega 922.8 1/s; PIMPLE solution converged in 2059 iterations (residualControl U 5e-4, p 1e-3, k and omega 1e-4); 0 -> 900 (clock 2405 s), restarted 900 -> 2059 (clock 2965 s), 8 MPI ranks, 2026-10-01; OpenFOAM 13-18870c24d21c"
+    ],
+    [
+      "Flow case",
+      "dictionaries from OOR `tutorials/uvReactorSozzi2006` (`659ec4a`) with SST, set up in an unmerged aquaflux branch; no committed script writes the case, so its dictionaries and log are copied into `data/records/raw/sozzi_slide10/flow_*`"
+    ],
+    [
+      "Lamp and water",
+      "diffuseEmitter on `lamp0_wall` and `lamp0_tip_B`, M = 696.42 W/m² (35 W over 0.80 m); absorption 35.67 /m; every other wall black"
+    ],
+    [
+      "DO and setFluenceRate",
+      "OOR `659ec4a`, 8 MPI ranks, convergence 1e-5 (15 sweeps at 72 directions, 15 at 288); uniform angular grids, nPhi = nTheta, every bin 30° or 15° square (Fluent: 3 × 3 and 6 × 6 θ × φ divisions per octant)"
+    ],
+    [
+      "Tracker",
+      "radiationDose at OOR `b23582b` (PR #90: the `langevin` dispersion model, one integrator with a continuous step, on `main` with #88 and #89); the tutorial's postProcess.dict: patchInjection on inlet, 10000 requested (9987 seeded), seed 42, dtMax 5 ms, cflMax 0.5, maxTime 300 s, wallReflection true, kInact (0.1); dispersion { type langevin; omega omega; Cmu 0.09; Cl 0.15 } (maxStepFraction 0.02, minLagrangianTime 1e-2 s, defaults); motion tracer; one OpenMP thread"
+    ],
+    [
+      "Fluent DO",
+      "solved in ANSYS Fluent on this mesh with 3 × 3 and 6 × 6 θ × φ divisions per octant (72 and 288 directions); the exports (`sozzi_fluent_3_3.cgns`, `sozzi_fluent_6_6.cgns`, CGNS 4.3) carry `Incident_Radiation` only and do not record the Fluent version, pixelation or scheme. of-mesh-converter (github.com/DeGrootResearchGroup/of-mesh-converter) `b654443` (PR #2, open): `transfer` matched their cells by centre (1232629, one to one and 1232629, one to one, largest distance 1.3e-15 m) and wrote G into `swap/fluent33/2059` and `swap/fluent66/2059`, copies of the slide 15 swap set's flow; traced at 2059 like the swap set"
+    ]
+  ],
+  "tables": [
+    {
+      "title": "Fluence rate fields traced (same flow, same tracker settings, same particles)",
+      "columns": [
+        "G",
+        "directions",
+        "pixels",
+        "ray scheme",
+        "escaped / stuck / timed out",
+        "mean dose",
+        "LR k=0.1"
+      ],
+      "rows": [
+        [
+          "line source on the lamp arc (setFluenceRate -xStart 0 -xEnd 0.80)",
+          "—",
+          "—",
+          "—",
+          "9,987 / 0 / 0",
+          "44.3",
+          "1.471"
+        ],
+        [
+          "DO, its own patch values",
+          "72 (6×6)",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "9,987 / 0 / 0",
+          "49.2",
+          "1.475"
+        ],
+        [
+          "DO, its own patch values (shown on slide 10)",
+          "288 (12×12)",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "9,987 / 0 / 0",
+          "49.5",
+          "1.491"
+        ],
+        [
+          "Fluent DO, zeroGradient patch values (G copied cell for cell from its CGNS export)",
+          "72 (3 × 3 per octant)",
+          "not recorded",
+          "not recorded",
+          "9,987 / 0 / 0",
+          "49.1",
+          "1.474"
+        ],
+        [
+          "Fluent DO, zeroGradient patch values (G copied cell for cell from its CGNS export) (shown on slide 10)",
+          "288 (6 × 6 per octant)",
+          "not recorded",
+          "not recorded",
+          "9,987 / 0 / 0",
+          "49.4",
+          "1.490"
+        ]
+      ]
+    }
+  ],
+  "notes": [
+    "Slide 10 shows 288 directions: the DO run with linearUpwind rays and its own patch values, whose G is below zero in 6.5 % of cells (the tracker counts them as zero), and Fluent's 6 × 6. At 72 directions both give a mean dose about 0.3 mJ/cm² and a log reduction about 0.016 lower.",
+    "Mean dose and log reduction are over the escaped particles."
+  ]
+}

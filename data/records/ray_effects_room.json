@@ -1,0 +1,204 @@
+{
+  "title": "Ray-effects room (slides 13–14)",
+  "common": [
+    [
+      "Room",
+      "4 × 4 × 3 m, air at 222 nm, transparent, no scattering"
+    ],
+    [
+      "Lamp",
+      "Ushio B1: `ushio_b1.ies` in the case, identical to this deck's `data/ushio_b1_222nm.ies` (OSLUV via guv-calcs). iesEmitter, 118.826 mW, facing down; the 6 × 4.5 cm window meshed as a 6.25 × 4.375 cm patch"
+    ],
+    [
+      "Bunny",
+      "`voronoi_bunny_open.stl` sha256 fc6dd66e9bbd…, base at 1.2 m; voronoi_bunny.py --cell 0.065 --strut 0.008 --shell 0.008 --pitch 0.0025"
+    ],
+    [
+      "Meshes",
+      "bunny 2,461,089 cells, empty 1,927,024; snappyHexMesh at OOR 96e51ee3"
+    ],
+    [
+      "Case files",
+      "aquaflux `validation/ray_effects_room` (DeGrootResearchGroup/aquaflux#597); DOM runs made by its `generate_dom.py`"
+    ],
+    [
+      "OpenFOAM",
+      "build 13-18870c24d21c, in a Docker image built from of-optical-radiation's `Dockerfile`"
+    ],
+    [
+      "DO angular grids",
+      "uniform, nPhi = nTheta (of-optical-radiation's nTheta bins span the whole sphere, so the bins are square only then): 6 × 6 = 72 directions, 12 × 12 = 288 (Fluent's 3 × 3 and 6 × 6 θ × φ divisions per octant). Runs of 2026-10-02/03, one at a time; the earlier 8 × 4 and 16 × 8 runs are kept in the case's `work/runs_nonuniform/`"
+    ]
+  ],
+  "tables": [
+    {
+      "title": "Discrete ordinates (of-optical-radiation)",
+      "columns": [
+        "run",
+        "directions",
+        "pixels",
+        "ray scheme",
+        "walls ρ",
+        "conv. / max iter",
+        "sweeps",
+        "ranks",
+        "OOR commit",
+        "wall s"
+      ],
+      "rows": [
+        [
+          "bunny_nphi12_ntheta12",
+          "288",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "0.0",
+          "1e-5 / 80",
+          "38",
+          "8",
+          "4f958357",
+          "10853"
+        ],
+        [
+          "bunny_nphi6_ntheta6",
+          "72",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "0.0",
+          "1e-5 / 80",
+          "37",
+          "8",
+          "4f958357",
+          "2654"
+        ],
+        [
+          "bunny_nphi6_ntheta6_px3x3",
+          "72",
+          "3×3",
+          "linearUpwind grad(Ii_h)",
+          "0.0",
+          "1e-5 / 80",
+          "37",
+          "8",
+          "4f958357",
+          "2804"
+        ],
+        [
+          "bunny_reflecting_nphi6_ntheta6",
+          "72",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "0.5",
+          "1e-5 / 80",
+          "65",
+          "8",
+          "4f958357",
+          "14596†"
+        ],
+        [
+          "empty_nphi12_ntheta12",
+          "288",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "0.0",
+          "1e-5 / 80",
+          "38",
+          "8",
+          "4f958357",
+          "5867"
+        ],
+        [
+          "empty_nphi6_ntheta6",
+          "72",
+          "1×1",
+          "linearUpwind grad(Ii_h)",
+          "0.0",
+          "1e-5 / 80",
+          "37",
+          "8",
+          "4f958357",
+          "1507"
+        ]
+      ]
+    },
+    {
+      "title": "aquaflux and the exact field",
+      "columns": [
+        "run",
+        "lamp",
+        "walls",
+        "library",
+        "aquaflux commit",
+        "wall s"
+      ],
+      "rows": [
+        [
+          "aquaflux empty",
+          "17920",
+          "black",
+          "jax 0.10.2",
+          "8dd4caae",
+          "137"
+        ],
+        [
+          "aquaflux bunny",
+          "17920",
+          "black",
+          "jax 0.10.2",
+          "8dd4caae",
+          "282"
+        ],
+        [
+          "aquaflux empty_volume",
+          "1120 (cells), 17920 (slices)",
+          "black",
+          "jax 0.10.2",
+          "8dd4caae",
+          "72"
+        ],
+        [
+          "aquaflux bunny_volume",
+          "1120 (cells), 17920 (slices)",
+          "black",
+          "jax 0.10.2",
+          "8dd4caae",
+          "851"
+        ],
+        [
+          "aquaflux bunny_reflecting",
+          "17920",
+          "4000 room triangles, ρ = 0.5",
+          "jax 0.10.2",
+          "8dd4caae",
+          "4184"
+        ],
+        [
+          "exact empty",
+          "17920 window samples",
+          "black",
+          "trimesh 5.1.0 + Embree",
+          "8dd4caae",
+          "38"
+        ],
+        [
+          "exact bunny",
+          "17920 window samples",
+          "black",
+          "trimesh 5.1.0 + Embree",
+          "8dd4caae",
+          "88"
+        ],
+        [
+          "exact bunny_stl",
+          "17920 window samples",
+          "black, STL bunny",
+          "trimesh 5.1.0 + Embree",
+          "8dd4caae",
+          "86"
+        ]
+      ]
+    }
+  ],
+  "notes": [
+    "† bunny_reflecting_nphi6_ntheta6: shared the machine with the Sozzi renders for its first few minutes, so its time may be a few minutes long."
+  ]
+}

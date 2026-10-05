@@ -1,0 +1,52 @@
+<script>
+// Slide numbers that restart for each part of the deck:
+//   body slides:        "n / N"        (title slide included, N = slides before the first divider)
+//   each appendix:      "A1: k / K"    (k counts from the first slide after the divider)
+//   an appendix divider: "A1"
+(function () {
+  function labels() {
+    var secs = Array.prototype.slice.call(document.querySelectorAll(".reveal .slides > section"));
+    var out = new Map();
+    var first = secs.findIndex(function (s) { return s.classList.contains("divider"); });
+    if (first < 0) first = secs.length;
+    secs.slice(0, first).forEach(function (s, i) { out.set(s, (i + 1) + " / " + first); });
+    var i = first, count = 0;
+    while (i < secs.length) {
+      var head = secs[i];
+      var title = (head.querySelector("h1, h2") || {}).textContent || "";
+      var m = title.match(/Appendix\s+(\d+)/i);
+      count += 1;
+      var tag = m ? "A" + m[1] : "A" + count;
+      var j = i + 1;
+      while (j < secs.length && !secs[j].classList.contains("divider")) j += 1;
+      var total = j - i - 1;
+      out.set(head, tag);
+      for (var k = 1; k <= total; k++) out.set(secs[i + k], tag + ": " + k + " / " + total);
+      i = j;
+    }
+    return out;
+  }
+  var map = null;
+  function apply() {
+    if (!window.Reveal || !Reveal.getCurrentSlide) return;
+    if (!map) map = labels();
+    var slide = Reveal.getCurrentSlide();
+    var text = slide && map.get(slide);
+    if (!text) return;
+    document.querySelectorAll(".reveal .slide-number a").forEach(function (a) {
+      if (a.textContent.trim() !== text) a.textContent = text;
+    });
+  }
+  function start() {
+    Reveal.on("slidechanged", apply);
+    Reveal.on("resize", apply);
+    Reveal.on("fragmentshown", apply);
+    apply();
+    var bar = document.querySelector(".reveal .slide-number");
+    if (bar) new MutationObserver(apply).observe(bar, { childList: true, subtree: true, characterData: true });
+  }
+  var timer = setInterval(function () {
+    if (window.Reveal && Reveal.isReady && Reveal.isReady()) { clearInterval(timer); start(); }
+  }, 100);
+})();
+</script>

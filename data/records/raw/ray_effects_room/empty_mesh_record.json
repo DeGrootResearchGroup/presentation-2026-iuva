@@ -1,0 +1,13 @@
+{
+  "check_mesh": {
+    "cells": 1927024,
+    "faces": 5858194,
+    "max_non_orthogonality_deg": 25.23940182,
+    "max_skewness": 0.3333333333,
+    "max_aspect_ratio": 1.0,
+    "tolerated_failures": {
+      "concave_cells": 28024
+    }
+  },
+  "of_optical_radiation_commit": "96e51ee39ce94757c5083c0b72c37fa5bf7f4db1"
+}

@@ -1,0 +1,18 @@
+{
+  "aquaflux": {
+    "G": "<runs>/sozzi_sst_dose_2026-10-01/swap/G_aquaflux.npy",
+    "patch_values": "zeroGradient (coupling patches: their constraint types)"
+  },
+  "dom72": {
+    "G": "<runs>/sozzi_sst_dose_2026-10-01/case/uv_dom6_lu/2060/G",
+    "patch_values": "zeroGradient (coupling patches: their constraint types)"
+  },
+  "dom288": {
+    "G": "<runs>/sozzi_sst_dose_2026-10-01/case/uv_dom12_lu/2060/G",
+    "patch_values": "zeroGradient (coupling patches: their constraint types)"
+  },
+  "dom288_native": {
+    "G": "<runs>/sozzi_sst_dose_2026-10-01/case/uv_dom12_lu/2060/G",
+    "patch_values": "the solver's own"
+  }
+}

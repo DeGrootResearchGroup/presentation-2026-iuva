@@ -1,0 +1,35 @@
+{
+    "written": "2026-10-01, for the IUVA 2026 deck's Sozzi slides (2, 3, 9, 10, 15)",
+    "mesh": {
+        "what": "uvmesh, the deck's data/uvmesh/mesh.py (prod_lowre5) with OOR's tutorials/uvReactorSozzi2006/SozziTaghipour.step",
+        "uvmesh": "OOR 276d992 (tools/uvMesh 0.12.0, PR #84), built from its working tree on 2026-09-30",
+        "cells": 1232629,
+        "max_non_orthogonality_deg": 52.8,
+        "first_cell": "20 um at the lamp sleeve (structured lamp layer), 100 um at the chamber wall (wall layer), joined non-conformally to a polyhedral bulk",
+        "format": "ascii"
+    },
+    "flow": {
+        "solver": "foamRun incompressibleFluid, PIMPLE with local time stepping (the tutorial's fvSolution: nCorrectors 2, nNonOrthogonalCorrectors 2, maxCo 1)",
+        "turbulence": "kOmegaSST; walls kLowReWallFunction / omegaWallFunction / nutUSpaldingWallFunction",
+        "inlet": "U (-5.51, 0, 0) m/s (25 US gal/min), k 0.4555 m2/s2, omega 922.8 1/s",
+        "fluid": "rho 998 kg/m3, nu 1e-6 m2/s",
+        "stopped": "PIMPLE solution converged in 2059 iterations (residualControl U 5e-4, p 1e-3, k and omega 1e-4)",
+        "legs": "0 -> 900 (clock 2405 s), restarted 900 -> 2059 (clock 2965 s), 8 MPI ranks, 2026-10-01",
+        "openfoam_build": "13-18870c24d21c",
+        "case_directory": "<aquaflux worktree sozzi-consistent-set>/validation/sozzi_radiation/work/lampcheck/arm_sst",
+        "code": "the case's dictionaries are OOR tutorials/uvReactorSozzi2006 (659ec4a) with SST; set up in aquaflux branch claude/sozzi-consistent-set (head 0d5c7b56, unmerged, with uncommitted changes); no committed script writes this case, so its dictionaries are copied into the deck's records"
+    },
+    "fluence_rates": {
+        "line source": "setFluenceRate -xStart 0 -xEnd 0.80 (OOR 659ec4a build in lib/ and bin/), case/uv_arc",
+        "DOM 64": "case/uv_dom_lu: 64 directions (8 x 4), 1 x 1 pixels, bounded Gauss linearUpwind rays, convergence 1e-5 (15 sweeps), 8 ranks, 293 s; OOR 659ec4a",
+        "DOM 256": "case/uv_dom256_lu: 256 directions (16 x 8), otherwise as DOM 64; 15 sweeps, 1037 s; OOR 659ec4a",
+        "aquaflux": "swap/G_aquaflux.npy from aquaflux validation/sozzi_radiation/uvmesh_swap.py (see swap/gather.json)",
+        "lamp": "diffuseEmitter on lamp0_wall and lamp0_tip_B, M = 696.42 W/m2; absorption 35.67 1/m; every other wall black"
+    },
+    "tracker": {
+        "code": "OOR b23582b (PR #90: the langevin dispersion model with one integrator for every step and a continuous step; on main 256b449 = #88 + #89), built into lib_b23582b (run_lgvB.sh, 2026-10-02). The first deck set used ebadf6e (the zone-switch model); its swap results are in swap_ebadf6e/",
+        "settings": "the tutorial's postProcess.dict: patchInjection on inlet, 10000 requested (9987 seeded), seed 42, dtMax 5 ms, cflMax 0.5, maxTime 300 s, wallReflection true, kInact (0.1); dispersion { type langevin; omega omega; Cmu 0.09; Cl 0.15 } (maxStepFraction 0.02, minLagrangianTime 1e-2 s, defaults); motion tracer",
+        "threads": "1 OpenMP thread (the walk depends on the thread count)",
+        "cases": "line source case/uv_arc_lgvB; slide 10 DOM (64 directions, its own patch values, VTK tracks every 10 steps) case/slide10_dom_lu_B; swap set swap/{aquaflux,dom64,dom256,dom256_native}"
+    }
+}

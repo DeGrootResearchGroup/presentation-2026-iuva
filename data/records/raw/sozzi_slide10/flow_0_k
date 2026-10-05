@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | uvReactorSozzi2006: turbulent kinetic energy
+   \\    /   O peration     |
+    \\  /    A nd           |
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// k = 1.5 * (TI*U)^2 with TI = 0.10 (Sozzi & Taghipour 2006), U = 5.51 m/s
+//   = 1.5 * (0.551)^2 = 0.4555 m^2/s^2
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0.4555;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    wall
+    {
+        type            kLowReWallFunction;
+        value           uniform 0.4555;
+    }
+
+    "(reactor_seam_(lamp0|pipe0|pipe1|layer0)|(lamp0|pipe0|pipe1|layer0)_seam)"
+    {
+        type zeroGradient;
+    }
+
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 0.4555;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
+    }
+
+
+}
+
+// ************************************************************************* //

@@ -1,0 +1,44 @@
+{
+  "note": "mJ/cm^2. 'integral' is integral(G dV) / Q; 'tracked' the tracker's mean over escaped particles.",
+  "paper_radial_integral": 43.962955155198166,
+  "prototype": {
+    "integral": 47.43114600240934,
+    "simulated_integral": 48.96193816462346,
+    "note": "Sozzi & Taghipour Table 1 prototype (Fig. 1c), their MPSS lamp model, 35 W, 70 % UVT, 25 GPM, arc centred in the body; lamp holder and outlet ring not included"
+  },
+  "rows": [
+    {
+      "label": "Sozzi & Taghipour, MPSS lamp",
+      "integral": 48.96193816462346,
+      "tracked": 68.0,
+      "group": "paper"
+    },
+    {
+      "label": "This work: line source (their eq. 3)",
+      "integral": 43.962955155198166,
+      "tracked": 44.313610568939616,
+      "group": "this"
+    },
+    {
+      "label": "This work: DO, 288 directions",
+      "integral": 49.002863886584024,
+      "tracked": 49.49821306718735,
+      "group": "this"
+    },
+    {
+      "label": "This work: aquaflux",
+      "integral": 48.84298261417891,
+      "tracked": 49.33285772143787,
+      "group": "this"
+    }
+  ],
+  "snappy_line_source": {
+    "integral": 43.962955155198166,
+    "tracked": {
+      "uncorrected random walk": 61.769834,
+      "corrected random walk": 47.141026,
+      "Langevin": 46.112858
+    },
+    "configuration": "tutorial snappyHexMesh mesh, SST flow, line source on the arc, seed 42, 3 threads; tracker: uncorrected walk OOR 659ec4a, corrected walk OOR 7f11000 plus the drift-correction change later merged as PR #88, Langevin OOR ebadf6e"
+  }
+}

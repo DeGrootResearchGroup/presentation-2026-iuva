@@ -1,0 +1,17 @@
+========================================================================
+of-mesh-converter transfer — report
+========================================================================
+  source        : <local>
+  target        : <runs>/sozzi_sst_dose_2026-10-01/swap/fluent33, time 2059
+  target centres: <runs>/sozzi_sst_dose_2026-10-01/swap/fluent33/2059/C
+  cells matched : 1232629, one to one
+  max distance  : 1.33e-15 m (2.39e-12 of the cell size; tolerance 0.001)
+
+Fields written
+  G          min=+4.27279e-08 max=+1392.16 mean=+416.289
+             boundaryField: kept from the file it replaced
+
+Notes from reading the CGNS file
+  - 8 BC(s) are Fluent mesh interfaces (layer0_seam-interface, reactor_seam_pipe0-interface, pipe0_seam-interface, reactor_seam_lamp0-interface, pipe1_seam-interface, reactor_seam_pipe1-interface, lamp0_seam-interface, reactor_seam_layer0-interface). They are written as ordinary patches with no coupling across them, so the tracker would stop or reflect particles there. Couple them in OpenFOAM (createNonConformalCouples) before tracking on this mesh, or map these fields onto a coupled OpenFOAM case.
+  - FlowSolution arrays have one value per element (5328293) rather than per cell (1232629), as Fluent writes them; cell values were taken at the volume sections' element ids.
+========================================================================

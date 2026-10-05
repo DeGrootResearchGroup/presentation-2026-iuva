@@ -1,0 +1,61 @@
+{
+  "note": "Wall-clock time to G on the uvmesh Sozzi mesh (1,232,629 cells), each run alone on the machine, 2026-10-02. Apple M3 Pro (Mac15,6), 11 cores (5 performance + 6 efficiency), 18 GB. Black walls, 35 W lamp, absorption 35.67 1/m. Run directory: aquaflux-runs/sozzi_sst_dose_2026-10-01/timing.",
+  "runs": {
+    "dom72": {
+      "seconds": 258,
+      "cores": 8,
+      "what": "opticalRadiationFoam ClockTime (mesh read, iterate to convergence 1e-5 in 15 sweeps, write), 8 MPI ranks, one thread each, in Docker (oor:gmsh48, VM with 11 CPUs); of-optical-radiation 659ec4a; uniform grid nPhi = nTheta = 6, 72 directions, 1x1 pixels, linearUpwind rays. decomposePar and reconstructPar not included. Run alone, 2026-10-02 12:20 (case/uv_dom6_lu)."
+    },
+    "dom288": {
+      "seconds": 1055,
+      "cores": 8,
+      "what": "as dom72, nPhi = nTheta = 12, 288 directions, 15 sweeps; run alone straight after it (case/uv_dom12_lu)."
+    },
+    "aquaflux": {
+      "seconds": 757,
+      "cores": 11,
+      "what": "validation/sozzi_radiation/uvmesh_swap.py gather stage (aquaflux 2ba97418, jax 0.10.2), native, all 11 cores: mesh read 24 s, lamp patches coarsened to 16,878 facets 18 s, gather 714 s (4,000-cell chunks). JAX's persistent compilation cache was warm. The field is bit-identical to the one on slide 15.",
+      "earlier_unchecked_seconds": 816
+    },
+    "grid_h6mm": {
+      "seconds": 67,
+      "cores": 11,
+      "parts_seconds": {
+        "mesh_read": 25.5,
+        "lamp_coarsening": 19.5,
+        "grid_setup": 4.6,
+        "gather": 13.2,
+        "interpolate": 3.9
+      },
+      "wet_nodes": 26121,
+      "what": "aquaflux validation/sozzi_radiation/background_grid.py: G gathered at the 26,121 wet nodes of a 6 mm Cartesian grid and taken to the cells as log G, fitted between the wet corners and the sleeve's own value 2M where a cell has corners inside it (variant logG_surface); native, 11 cores, nothing else on the machine (the 6 and 4 mm gathers ran past the launcher's free-memory check, which Docker's VM was failing)."
+    },
+    "grid_h4mm": {
+      "seconds": 96,
+      "cores": 11,
+      "parts_seconds": {
+        "mesh_read": 25.5,
+        "lamp_coarsening": 19.5,
+        "grid_setup": 4.9,
+        "gather": 42.5,
+        "interpolate": 3.6
+      },
+      "wet_nodes": 90788,
+      "what": "aquaflux validation/sozzi_radiation/background_grid.py: G gathered at the 90,788 wet nodes of a 4 mm Cartesian grid and taken to the cells as log G, fitted between the wet corners and the sleeve's own value 2M where a cell has corners inside it (variant logG_surface); native, 11 cores, nothing else on the machine (the 6 and 4 mm gathers ran past the launcher's free-memory check, which Docker's VM was failing)."
+    },
+    "grid_h3mm": {
+      "seconds": 145,
+      "cores": 11,
+      "parts_seconds": {
+        "mesh_read": 24.0,
+        "lamp_coarsening": 19.6,
+        "grid_setup": 5.3,
+        "gather": 92.4,
+        "interpolate": 3.7
+      },
+      "wet_nodes": 212523,
+      "what": "aquaflux validation/sozzi_radiation/background_grid.py: G gathered at the 212,523 wet nodes of a 3 mm Cartesian grid and taken to the cells as log G, fitted between the wet corners and the sleeve's own value 2M where a cell has corners inside it (variant logG_surface); native, 11 cores, nothing else on the machine (the 6 and 4 mm gathers ran past the launcher's free-memory check, which Docker's VM was failing)."
+    }
+  },
+  "superseded": "The 64- (8 x 4) and 256-direction (16 x 8) DO runs timed first, 270 s and 999 s, had phi bins half the width of their theta bins and were replaced by the uniform 6 x 6 and 12 x 12 grids."
+}
